@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+
+      const data = [120, 190, 150, 230, 180]; // Datos de ejemplo
+      const barWidth = 50; // Ancho de cada barra
+
+      data.forEach((value, index) => {
+        // Iterar sobre los datos
+        ctx.fillStyle = "orange"; // Establecer el color de relleno
+        ctx.fillRect(
+          // Dibujar la barra
+          index * (barWidth + 10), // Posición X
+          canvas.height - value, // Posición Y
+          barWidth, // Ancho
+          value // Alto
+        );
+      });
+    </script>
+  </body>
+</html>

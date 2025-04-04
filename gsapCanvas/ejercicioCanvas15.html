@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+
+      let angle = 0;
+      let scale = 1;
+
+      function animateTransformations() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(angle);
+        ctx.scale(scale, scale);
+        ctx.fillStyle = "green";
+        ctx.fillRect(-50, -50, 100, 100);
+        ctx.restore();
+
+        angle += 0.02;
+        scale = 1 + Math.sin(angle) * 0.5;
+
+        requestAnimationFrame(animateTransformations);
+      }
+
+      animateTransformations();
+    </script>
+  </body>
+</html>

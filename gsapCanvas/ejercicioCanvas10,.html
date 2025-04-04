@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+
+      canvas.addEventListener("mousemove", (e) => {
+        // Agregar un evento de movimiento del mouse al canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
+        ctx.beginPath(); // Iniciar un nuevo camino
+        ctx.arc(e.offsetX, e.offsetY, 30, 0, Math.PI * 2); // Dibujar un círculo en la posición del mouse
+        ctx.fillStyle = "blue"; // Establecer el color de relleno del círculo
+        ctx.fill(); // Rellenar el círculo
+      });
+    </script>
+  </body>
+</html>

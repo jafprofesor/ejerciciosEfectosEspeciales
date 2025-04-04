@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación GSAP</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+      }
+
+      #draggable {
+        width: 150px;
+        height: 150px;
+        background-color: #e74c3c;
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        cursor: grab;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        user-select: none;
+        transition: all 0.3s ease;
+      }
+
+      #draggable:active {
+        cursor: grabbing;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Elemento arrastrable -->
+    <div id="draggable">Arrastrame</div>
+
+    <script>
+      // Requiere HTML con un elemento #draggable
+      const draggable = document.getElementById("draggable");
+      let isDragging = false;
+      let currentX = 0;
+      let currentY = 0;
+
+      draggable.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        draggable.style.transition = "none"; // Eliminar transición durante el arrastre
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          draggable.style.left = `${e.clientX - draggable.offsetWidth / 2}px`;
+          draggable.style.top = `${e.clientY - draggable.offsetHeight / 2}px`;
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+        draggable.style.transition = "all 0.3s ease"; // Aplicar transición al soltar
+      });
+    </script>
+  </body>
+</html>

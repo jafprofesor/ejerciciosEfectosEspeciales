@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación GSAP</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tu contenido irá aquí -->
+    <div id="contador">0</div>
+    <button id="incrementar">+1</button>
+
+    <script>
+      let contador = 0;
+      const elementoContador = document.getElementById("contador");
+      document.getElementById("incrementar").addEventListener("click", () => {
+        contador++;
+        elementoContador.style.transition = "opacity 0.3s";
+        elementoContador.style.opacity = 0;
+        setTimeout(() => {
+          elementoContador.textContent = contador;
+          elementoContador.style.opacity = 1;
+        }, 300);
+      });
+    </script>
+  </body>
+</html>

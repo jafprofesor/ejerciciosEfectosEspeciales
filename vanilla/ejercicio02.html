@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación GSAP</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tu contenido irá aquí -->
+    <button id="mover">Mover</button>
+    <div
+      id="objeto"
+      style="width: 50px; height: 50px; background: green; position: relative"
+    ></div>
+
+    <script>
+      const boton = document.getElementById("mover");
+      const objeto = document.getElementById("objeto");
+      let posicion = 0;
+
+      boton.addEventListener("click", () => {
+        posicion += 50;
+        objeto.style.transition = "left 0.5s ease-in-out";
+        objeto.style.left = `${posicion}px`;
+      });
+    </script>
+  </body>
+</html>

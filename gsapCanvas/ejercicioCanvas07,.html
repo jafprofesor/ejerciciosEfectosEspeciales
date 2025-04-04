@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+
+      let isDrawing = false; // Variable para controlar si estamos dibujando
+
+      canvas.addEventListener("mousedown", (e) => {
+        // Evento cuando se presiona el botón del mouse
+        isDrawing = true; // Establecer la variable a true
+        ctx.beginPath(); // Iniciar un nuevo camino
+        ctx.moveTo(e.offsetX, e.offsetY); // Mover el cursor al punto donde se presionó el mouse
+      });
+
+      canvas.addEventListener("mousemove", (e) => {
+        // Evento cuando se mueve el mouse
+        if (isDrawing) {
+          // Si estamos dibujando
+          ctx.lineTo(e.offsetX, e.offsetY); // Dibujar una línea desde el punto anterior hasta el punto actual
+          ctx.stroke(); // Dibujar la línea en el canvas
+        }
+      });
+
+      canvas.addEventListener("mouseup", () => {
+        // Evento cuando se suelta el botón del mouse
+        isDrawing = false; // Establecer la variable a false
+      });
+    </script>
+  </body>
+</html>

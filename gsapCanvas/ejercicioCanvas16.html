@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+
+      let ball = {
+        x: 50,
+        y: 50,
+        vx: 2,
+        vy: 0,
+        radius: 20,
+        gravity: 0.5,
+        bounce: 0.7,
+      };
+
+      function updateBall() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ball.vy += ball.gravity;
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        if (ball.y + ball.radius > canvas.height) {
+          ball.y = canvas.height - ball.radius;
+          ball.vy = -ball.vy * ball.bounce;
+        }
+
+        if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+          ball.vx = -ball.vx;
+        }
+
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+
+        requestAnimationFrame(updateBall);
+      }
+
+      updateBall();
+    </script>
+  </body>
+</html>

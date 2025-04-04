@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+
+      let morph = 0;
+      let direction = 1;
+
+      function animateMorphing() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const size = 100;
+        const x = canvas.width / 2;
+        const y = canvas.height / 2;
+
+        ctx.beginPath();
+        ctx.moveTo(x, y - size / 2);
+
+        for (let i = 0; i < 4; i++) {
+          const angle = ((i + morph) * Math.PI) / 2;
+          const dx = (Math.cos(angle) * size) / 2;
+          const dy = (Math.sin(angle) * size) / 2;
+          ctx.lineTo(x + dx, y + dy);
+        }
+
+        ctx.closePath();
+        ctx.stroke();
+
+        morph += 0.01 * direction;
+        if (morph > 1 || morph < 0) direction = -direction;
+
+        requestAnimationFrame(animateMorphing);
+      }
+
+      animateMorphing();
+    </script>
+  </body>
+</html>

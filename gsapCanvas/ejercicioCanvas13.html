@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+      let player = {
+        x: canvas.width / 2,
+        y: canvas.height - 30,
+        width: 20,
+        height: 20,
+        color: "blue",
+      };
+      let obstacles = [];
+
+      function createObstacle() {
+        const obstacle = {
+          x: Math.random() * canvas.width,
+          y: 0,
+          width: 20,
+          height: 20,
+          color: "red",
+        };
+        obstacles.push(obstacle);
+      }
+
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+
+        obstacles.forEach((obstacle, index) => {
+          obstacle.y += 2;
+          ctx.fillStyle = obstacle.color;
+          ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+
+          if (obstacle.y > canvas.height) {
+            obstacles.splice(index, 1);
+          }
+
+          if (
+            player.x < obstacle.x + obstacle.width &&
+            player.x + player.width > obstacle.x &&
+            player.y < obstacle.y + obstacle.height &&
+            player.y + player.height > obstacle.y
+          ) {
+            alert("Game Over!");
+            document.location.reload();
+          }
+        });
+
+        requestAnimationFrame(update);
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "ArrowLeft") player.x -= 20;
+        if (e.code === "ArrowRight") player.x += 20;
+      });
+
+      setInterval(createObstacle, 1000);
+      update();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación GSAP</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+      }
+
+      #draggable {
+        width: 150px;
+        height: 150px;
+        background-color: #e74c3c;
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        cursor: grab;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        user-select: none;
+        transition: all 0.3s ease;
+      }
+
+      #draggable:active {
+        cursor: grabbing;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Elemento arrastrable -->
+    <canvas id="canvas" width="400" height="300"></canvas>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      const particulas = [];
+
+      class Particula {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.velX = (Math.random() - 0.5) * 5;
+          this.velY = (Math.random() - 0.5) * 5;
+        }
+
+        actualizar() {
+          if (this.x < 0 || this.x > canvas.width) this.velX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.velY *= -1;
+          this.x += this.velX;
+          this.y += this.velY;
+        }
+
+        dibujar() {
+          ctx.fillStyle = "#f00";
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Crear 20 partículas
+      for (let i = 0; i < 20; i++) {
+        particulas.push(new Particula());
+      }
+
+      function animar() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particulas.forEach((particula) => {
+          particula.actualizar();
+          particula.dibujar();
+        });
+        requestAnimationFrame(animar);
+      }
+
+      animar();
+    </script>
+  </body>
+</html>

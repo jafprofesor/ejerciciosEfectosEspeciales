@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación GSAP</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tu contenido irá aquí -->
+    <img src="imagen.png" id="imagen" style="transition: transform 0.3s" />
+
+    <script>
+      const imagen = document.getElementById("imagen");
+      imagen.addEventListener("mouseenter", () => {
+        imagen.style.transform = "scale(1.1)";
+      });
+      imagen.addEventListener("mouseleave", () => {
+        imagen.style.transform = "scale(1)";
+      });
+    </script>
+  </body>
+</html>

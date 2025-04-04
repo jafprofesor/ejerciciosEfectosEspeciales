@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación GSAP</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+      body {
+        height: 2000px; /* Add height to enable scrolling */
+      }
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+        margin-top: 200px; /* Position the box a bit down so you can see the animation */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tu contenido irá aquí -->
+    <h1>Animación GSAP</h1>
+    <div id="box"></div>
+    <script>
+      // Tus animaciones GSAP irán aquí
+      gsap.registerPlugin(ScrollTrigger); // Registra el plugin ScrollTrigger para animaciones basadas en el desplazamiento
+
+      gsap.to("#box", {
+        x: 300,
+        duration: 2,
+        scrollTrigger: {
+          trigger: "#box",
+          start: "top center",
+          end: "bottom center",
+          scrub: true,
+          markers: true, // Add markers to see the trigger points
+        },
+      });
+    </script>
+  </body>
+</html>

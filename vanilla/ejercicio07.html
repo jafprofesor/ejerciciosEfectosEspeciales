@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <title>Matrix</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: black;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="matrix"></canvas>
+    <audio
+      id="keySound"
+      src="https://assets.mixkit.co/active_storage/sfx/2865/2865-preview.mp3"
+    ></audio>
+
+    <script>
+      const canvas = document.getElementById("matrix");
+      const ctx = canvas.getContext("2d");
+
+      // Configuración inicial
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const caracteres =
+        "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン";
+      const fontSize = 14;
+      const columnas = canvas.width / fontSize;
+
+      // Array para rastrear la posición Y de cada gota
+      const drops = Array(Math.floor(columnas)).fill(1);
+
+      // Modificación en la función dibujar()
+      // const keySound = document.getElementById("keySound");
+      // Configurar sonido
+      const sound = new Howl({
+        src: [
+          "https://assets.mixkit.co/active_storage/sfx/2865/2865-preview.mp3",
+        ],
+        volume: 0.2,
+        sprite: {
+          key: [0, 100], // Recorte el sample a 100ms
+        },
+        onloaderror: function () {
+          console.error("Error loading sound");
+        },
+        onplayerror: function () {
+          console.error("Error playing sound");
+          // Try unlocking audio on user interaction
+          sound.once("unlock", function () {
+            sound.play("key");
+          });
+        },
+      });
+
+      function dibujar() {
+        /*  if (Math.random() < 0.3) {
+          keySound.currentTime = 0;
+          keySound.play();
+        }*/
+        // En el loop de dibujo
+        if (Math.random() < 0.2) {
+          sound.play("key");
+        }
+        // Fondo semi-transparente para efecto de desvanecimiento
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Color y fuente para los caracteres
+        ctx.fillStyle = "#0F0";
+        ctx.font = fontSize + "px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+          // Carácter aleatorio
+          const char =
+            caracteres[Math.floor(Math.random() * caracteres.length)];
+
+          // Coordenadas
+          const x = i * fontSize;
+          const y = drops[i] * fontSize;
+
+          // Dibujar el carácter
+          ctx.fillText(char, x, y);
+
+          // Resetear gota al llegar al final + aleatoriedad
+          if (y > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+
+          // Mover la gota
+          drops[i]++;
+        }
+      }
+
+      // Iniciar animación
+      setInterval(dibujar, 50);
+
+      // Ajustar tamaño al cambiar ventana
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>

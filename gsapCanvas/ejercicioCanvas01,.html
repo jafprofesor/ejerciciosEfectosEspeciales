@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rectángulo en Canvas</title>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="300" height="200"></canvas>
+
+    <script>
+      const canvas = document.getElementById("myCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+      ctx.fillStyle = "blue"; // Establecer el color de relleno
+      ctx.fillRect(10, 10, 150, 100); // Dibujar un rectángulo
+    </script>
+  </body>
+</html>

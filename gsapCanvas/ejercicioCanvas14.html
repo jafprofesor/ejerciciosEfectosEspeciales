@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+
+      function drawSierpinski(ctx, x, y, size) {
+        if (size < 1) return;
+
+        const h = (size * Math.sqrt(3)) / 2;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + size / 2, y + h);
+        ctx.lineTo(x - size / 2, y + h);
+        ctx.closePath();
+        ctx.stroke();
+
+        drawSierpinski(ctx, x, y, size / 2);
+        drawSierpinski(ctx, x - size / 4, y + h / 2, size / 2);
+        drawSierpinski(ctx, x + size / 4, y + h / 2, size / 2);
+      }
+
+      drawSierpinski(ctx, canvas.width / 2, 20, 200);
+    </script>
+  </body>
+</html>

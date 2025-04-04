@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación GSAP</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tu contenido irá aquí -->
+    <h1>CAMBIO DE COLOR AL HACER CLIC</h1>
+    <div id="caja" style="width: 100px; height: 100px; background: red"></div>
+    <script>
+      const caja = document.getElementById("caja");
+      caja.addEventListener("click", () => {
+        caja.style.transition = "background 1s";
+        caja.style.background = "blue";
+      });
+    </script>
+  </body>
+</html>

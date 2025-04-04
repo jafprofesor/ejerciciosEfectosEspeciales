@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Círculo en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="miCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("miCanvas"); // Obtener el elemento canvas
+      const ctx = canvas.getContext("2d"); // Obtener el contexto de dibujo
+      const data = [120, 190, 150, 230, 180];
+      const barWidth = 50;
+
+      data.forEach((value, index) => {
+        ctx.fillStyle = "orange";
+        ctx.fillRect(
+          index * (barWidth + 10),
+          canvas.height - value,
+          barWidth,
+          value
+        );
+      });
+
+      canvas.addEventListener("mousemove", (e) => {
+        const barIndex = Math.floor(e.offsetX / (barWidth + 10));
+        if (barIndex >= 0 && barIndex < data.length) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          data.forEach((value, i) => {
+            ctx.fillStyle = "orange";
+            ctx.fillRect(
+              i * (barWidth + 10),
+              canvas.height - value,
+              barWidth,
+              value
+            );
+          });
+          ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+          ctx.fillText(
+            data[barIndex],
+            barIndex * (barWidth + 10),
+            canvas.height - data[barIndex] - 10
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
